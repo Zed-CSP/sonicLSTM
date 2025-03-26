@@ -2,6 +2,33 @@
 
 An LSTM-based AI agent that learns to play Sonic the Hedgehog using deep reinforcement learning.
 
+## Table of Contents
+- [Project Structure](#project-structure)
+- [Setup](#setup)
+- [Usage](#usage)
+- [Model Architecture](#model-architecture)
+  - [CNN Layers](#cnn-layers)
+  - [LSTM Layers](#lstm-layers)
+  - [Training Configuration](#training-configuration)
+- [Hyperparameter Tuning](#hyperparameter-tuning)
+  - [Search Space](#search-space)
+  - [Tuning Process](#tuning-process)
+  - [Parameter Sensitivity Analysis](#parameter-sensitivity-analysis)
+- [Visualization and Monitoring](#visualization-and-monitoring)
+  - [Training Metrics Visualization](#training-metrics-visualization)
+  - [Real-time Monitoring](#real-time-monitoring)
+  - [Performance Analysis](#performance-analysis)
+- [Reward Structure](#reward-structure)
+  - [Primary Rewards](#primary-rewards)
+  - [Penalties](#penalties)
+  - [Reward Shaping](#reward-shaping)
+- [Model Evaluation](#model-evaluation)
+  - [Training Metrics](#training-metrics)
+  - [Evaluation Protocol](#evaluation-protocol)
+  - [Performance Benchmarks](#performance-benchmarks)
+- [Preprocessing](#preprocessing)
+- [Training](#training)
+
 ## Project Structure
 
 ```
