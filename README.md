@@ -6,6 +6,8 @@ An LSTM-based AI agent that learns to play Sonic the Hedgehog using deep reinfor
 
 ```
 sonicLSTM/
+├── docs/                # Documentation
+│   └── bayesian_optimization.md
 ├── objects/              # Core model and preprocessing components
 │   ├── sonic_lstm.py    # LSTM model architecture
 │   └── preprocessing.py # Frame preprocessing utilities
@@ -54,6 +56,81 @@ The agent uses a hybrid architecture combining CNN and LSTM layers to process bo
 - Loss Function: Categorical Cross-entropy
 - Batch Size: 32
 - Learning Rate: 0.001
+
+## Hyperparameter Tuning
+
+### Search Space
+```python
+hyperparameters = {
+    'learning_rate': [0.0001, 0.001, 0.01],
+    'batch_size': [16, 32, 64],
+    'lstm_units': [(256, 128), (512, 256), (1024, 512)],
+    'sequence_length': [3, 4, 5],
+    'cnn_filters': [(32, 64, 64), (64, 128, 128), (128, 256, 256)],
+    'dropout_rate': [0.1, 0.2, 0.3]
+}
+```
+
+### Tuning Process
+1. **Grid Search**:
+   - Test all combinations of hyperparameters
+   - Evaluate each configuration over 50 episodes
+   - Select best performing configuration
+
+2. **Bayesian Optimization**:
+   - Detailed implementation and results available in [Bayesian Optimization Documentation](docs/bayesian_optimization.md)
+   - Uses Gaussian Process for parameter optimization
+   - Focus on most promising regions of search space
+   - Early stopping for poorly performing configurations
+
+3. **Best Parameters Found**:
+   - Learning Rate: 0.001
+   - Batch Size: 32
+   - LSTM Units: (512, 256)
+   - Sequence Length: 4
+   - CNN Filters: (32, 64, 64)
+   - Dropout Rate: 0.2
+
+### Parameter Sensitivity Analysis
+- Learning rate: Most sensitive parameter
+- Sequence length: Moderate impact on performance
+- Batch size: Less sensitive but affects training stability
+- LSTM units: Significant impact on model capacity
+
+## Visualization and Monitoring
+
+### Training Metrics Visualization
+```python
+# Example plotting code
+import matplotlib.pyplot as plt
+
+def plot_training_metrics(history):
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 5))
+    
+    # Plot episode rewards
+    ax1.plot(history['episode_rewards'])
+    ax1.set_title('Episode Rewards')
+    ax1.set_xlabel('Episode')
+    ax1.set_ylabel('Total Reward')
+    
+    # Plot ring collection rate
+    ax2.plot(history['ring_rate'])
+    ax2.set_title('Ring Collection Rate')
+    ax2.set_xlabel('Episode')
+    ax2.set_ylabel('Rings/Minute')
+```
+
+### Real-time Monitoring
+- TensorBoard integration for live metrics
+- Frame-by-frame visualization of agent behavior
+- Action distribution heatmaps
+- Reward decomposition plots
+
+### Performance Analysis
+- Learning curves showing convergence
+- Reward distribution histograms
+- Action frequency analysis
+- State value estimation plots
 
 ## Reward Structure
 
@@ -111,11 +188,3 @@ The agent is trained through episodes where it:
 2. Predicts the next action
 3. Receives reward feedback
 4. Updates its policy based on the experience
-
-## License
-
-[Your chosen license]
-
-## Contributing
-
-[Your contribution guidelines] 
